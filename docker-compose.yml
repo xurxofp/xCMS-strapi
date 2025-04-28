@@ -2,8 +2,8 @@ version: '3'
 services:
   xCMS-strapi:
     container_name: xCMS-strapi
-    build: .
-    image: xcms-strapi:latest
+    # build: .
+    image: mi-strapi-app:prod
     restart: unless-stopped
     env_file: .env
     environment:
