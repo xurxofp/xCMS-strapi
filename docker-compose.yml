@@ -3,7 +3,7 @@ services:
   xCMS-strapi:
     container_name: xCMS-strapi
     # build: .
-    image: mi-strapi-app:prod
+    image: xurxofp/xcms-strapi:latest
     restart: unless-stopped
     env_file: .env
     environment:
