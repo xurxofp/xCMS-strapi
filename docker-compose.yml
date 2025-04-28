@@ -2,7 +2,6 @@ version: '3'
 services:
   xCMS-strapi:
     container_name: xCMS-strapi
-    # build: .
     image: xurxofp/xcms-strapi:latest
     restart: unless-stopped
     env_file: .env
@@ -23,52 +22,17 @@ services:
       - ./yarn.lock:/opt/yarn.lock
       - ./.env:/opt/app/.env
       - ./public/uploads:/opt/app/public/uploads
+    networks:
+      - frontend
+      - backend
     ports:
       - '1337:1337'
-    # networks:
-    #   - xCMS-strapi
-    # depends_on:
-    #   - xCMS-strapiDB
-      
-  # xcms-strapiDB:
-  #   container_name: xcms-strapiDB
-  #   platform: linux/amd64 #for platform error on Apple M1 chips
-  #   restart: unless-stopped
-  #   env_file: .env
-  #   image: mysql:latest
-  #   command: --default-authentication-plugin=mysql_native_password
-  #   environment:
-  #     MYSQL_USER: ${DATABASE_USERNAME}
-  #     MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
-  #     MYSQL_PASSWORD: ${DATABASE_PASSWORD}
-  #     MYSQL_DATABASE: ${DATABASE_NAME}
-  #     MYSQL_ROOT_HOST: '%'
-  #   volumes:
-  #     - xcms-strapi-data:/var/lib/mysql
-  #     #- ./data:/var/lib/postgresql/data/ # if you want to use a bind folder
-  #   ports:
-  #     - '3306:3306'
-  #   networks:
-  #     - xcms-strapi
-      
-  # xcms-strapiAdminer:
-  #   container_name: xcms-strapiAdminer
-  #   image: adminer
-  #   restart: unless-stopped
-  #   ports:
-  #     - '9090:8080'
-  #   environment:
-  #     - ADMINER_DEFAULT_SERVER=xcms-strapiDB
-  #   networks:
-  #     - xcms-strapi
-  #   depends_on:
-  #     - xCMS-strapiDB
+    
 
-volumes:
-  xcms-strapi-data:
-
-# networks:
-#   xCMS-strapi:
-#     name: Xcms-strapi
-#     driver: bridge
-
+networks:
+  frontend:
+    external:
+      name: traefik_frontend
+  backend:
+    external:
+      name: mysql_backend
