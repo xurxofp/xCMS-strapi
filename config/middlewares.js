@@ -1,8 +1,20 @@
-type EnvFn = (key: string, defaultValue?: any) => string | number | boolean;
-
-export default ({ env }: { env: EnvFn }) => [
+module.exports = ({ env }) => [
   'strapi::logger',
   'strapi::errors',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          'connect-src': ["'self'", 'https:'],
+          "img-src":      ["'self'", "data:", "blob:", env("CDN_URL")],
+          "media-src":    ["'self'", "data:", "blob:", env("CDN_URL")],
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
@@ -10,19 +22,5 @@ export default ({ env }: { env: EnvFn }) => [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
-  {
-    name: 'strapi::security',
-    config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          "connect-src":  ["'self'", "https:"],
-          "img-src":      ["'self'", "data:", "blob:", env("CDN_URL")],
-          "media-src":    ["'self'", "data:", "blob:", env("CDN_URL")],
-          // anula la directiva upgradeInsecureRequests (opcional)
-          upgradeInsecureRequests: null,
-        },
-      },
-    },
-  },
 ];
+
