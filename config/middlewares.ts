@@ -1,4 +1,6 @@
-export default [
+type EnvFn = (key: string, defaultValue?: any) => string | number | boolean;
+
+export default ({ env }: { env: EnvFn }) => [
   'strapi::logger',
   'strapi::errors',
   'strapi::security',
@@ -9,4 +11,19 @@ export default [
   'strapi::session',
   'strapi::favicon',
   'strapi::public',
+  {
+    name: 'strapi::security',
+    config: {
+      contentSecurityPolicy: {
+        useDefaults: true,
+        directives: {
+          "connect-src":  ["'self'", "https:"],
+          "img-src":      ["'self'", "data:", "blob:", env("CDN_URL")],
+          "media-src":    ["'self'", "data:", "blob:", env("CDN_URL")],
+          // anula la directiva upgradeInsecureRequests (opcional)
+          upgradeInsecureRequests: null,
+        },
+      },
+    },
+  },
 ];
