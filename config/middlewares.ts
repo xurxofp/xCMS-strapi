@@ -1,8 +1,5 @@
 type EnvFn = (key: string, defaultValue?: any) => string | number | boolean;
 
-console.log('[🛡️ CSP] cargando config/middlewares.ts personalizada');
-
-
 export default ({ env }: { env: EnvFn }) => [
   'strapi::logger',
   'strapi::errors',
