@@ -3,7 +3,6 @@ type EnvFn = (key: string, defaultValue?: any) => string | number | boolean;
 export default ({ env }: { env: EnvFn }) => [
   'strapi::logger',
   'strapi::errors',
-  'strapi::security',
   'strapi::cors',
   'strapi::poweredBy',
   'strapi::query',
