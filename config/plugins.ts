@@ -22,7 +22,7 @@ export default ({ env }: { env: EnvFn }) => ({
           },
         },
         formats: [
-          { name: 'webp', options: { quality: 70 } }, // WebP con calidad 80
+        //   { name: 'webp', options: { quality: 70 } }, // WebP con calidad 80
           { name: 'avif', options: { quality: 70 } }, // AVIF con calidad 60
           { name: 'jpg', options: { quality: 50 } },  // JPG con calidad 90
         ],
@@ -35,4 +35,26 @@ export default ({ env }: { env: EnvFn }) => ({
       },
     },
   },
+  'publisher': {
+		enabled: true,
+		config: {
+			hooks: {
+				beforePublish: async ({ strapi, uid, entity }) => {
+					console.log('beforePublish');
+				},
+				afterPublish: async ({ strapi, uid, entity }) => {
+					console.log('afterPublish');
+				},
+				beforeUnpublish: async ({ strapi, uid, entity }) => {
+					console.log('beforeUnpublish');
+				},
+				afterUnpublish: async ({ strapi, uid, entity }) => {
+					console.log('afterUnpublish');
+				},
+			},
+		},
+	},
+    'webhooks': {
+        validateUrl: false,
+    },
 });

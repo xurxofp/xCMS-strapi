@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "resumya_authors",
+  "info": {
+    "singularName": "resumya-author",
+    "pluralName": "resumya-authors",
+    "displayName": "resumya-author"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "email": {
+      "type": "email"
+    },
+    "resumya_posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resumya-post.resumya-post",
+      "mappedBy": "resumya_authors"
+    }
+  }
+}
