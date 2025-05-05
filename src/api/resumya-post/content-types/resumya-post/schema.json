@@ -1,0 +1,58 @@
+{
+    "kind": "collectionType",
+    "collectionName": "resumya_posts",
+    "info": {
+        "singularName": "resumya-post",
+        "pluralName": "resumya-posts",
+        "displayName": "resumya-post",
+        "description": ""
+    },
+    "options": {
+        "draftAndPublish": true
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true,
+            "unique": true
+        },
+        "excerpt": {
+            "type": "text",
+            "required": true
+        },
+        "content": {
+            "type": "blocks",
+            "required": true
+        },
+        "date": {
+            "type": "datetime",
+            "required": true
+        },
+        "slug": {
+            "type": "uid"
+        },
+        "cover": {
+            "type": "media",
+            "multiple": false,
+            "required": true,
+            "allowedTypes": [
+                "images",
+                "files",
+                "videos",
+                "audios"
+            ]
+        },
+        "resumya_authors": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::resumya-author.resumya-author",
+            "inversedBy": "resumya_posts"
+        },
+        "resumya_categories": {
+            "type": "relation",
+            "relation": "manyToMany",
+            "target": "api::resumya-category.resumya-category",
+            "inversedBy": "resumya_posts"
+        }
+    }
+}
