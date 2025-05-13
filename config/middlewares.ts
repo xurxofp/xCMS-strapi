@@ -10,20 +10,5 @@ export default ({ env }: { env: EnvFn }) => [
   'strapi::body',
   'strapi::session',
   'strapi::favicon',
-  {
-    name: 'strapi::security',
-    config: {
-      contentSecurityPolicy: {
-        useDefaults: true,
-        directives: {
-          "connect-src":  ["'self'", "https:"],
-          "img-src":      ["'self'", "data:", "blob:", env("CDN_URL")],
-          "media-src":    ["'self'", "data:", "blob:", env("CDN_URL")],
-          // anula la directiva upgradeInsecureRequests (opcional)
-          upgradeInsecureRequests: null,
-        },
-      },
-    },
-  },
   'strapi::public',
 ];

@@ -1,30 +1,30 @@
 {
-    "kind": "collectionType",
-    "collectionName": "resumya_categories",
-    "info": {
-        "singularName": "resumya-category",
-        "pluralName": "resumya-categories",
-        "displayName": "resumya-category",
-        "description": ""
+  "kind": "collectionType",
+  "collectionName": "resumya_categories",
+  "info": {
+    "singularName": "resumya-category",
+    "pluralName": "resumya-categories",
+    "displayName": "resumya-category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
     },
-    "options": {
-        "draftAndPublish": false
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     },
-    "attributes": {
-        "name": {
-            "type": "string",
-            "required": true,
-            "unique": true
-        },
-        "slug": {
-            "type": "uid",
-            "targetField": "name"
-        },
-        "resumya_posts": {
-            "type": "relation",
-            "relation": "manyToMany",
-            "target": "api::resumya-post.resumya-post",
-            "mappedBy": "resumya_categories"
-        }
+    "resumya_posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::resumya-post.resumya-post",
+      "mappedBy": "resumya_categories"
     }
+  }
 }
